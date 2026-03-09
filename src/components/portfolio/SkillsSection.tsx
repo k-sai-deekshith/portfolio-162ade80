@@ -1,5 +1,5 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { TextReveal, FadeUp, StaggerContainer, StaggerItem, SmoothParallax } from "./AnimationUtils";
 
 const skillCategories = [
   {
@@ -39,54 +39,48 @@ const skillCategories = [
 ];
 
 const SkillsSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="skills" className="section-container" ref={ref}>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">✦ My Stack</p>
-        <h2 className="section-heading">Skills</h2>
-        <p className="section-subheading">Technologies I work with daily to build production-grade applications.</p>
-      </motion.div>
+    <section id="skills" className="section-container">
+      <SmoothParallax offset={30}>
+        <FadeUp>
+          <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">✦ My Stack</p>
+        </FadeUp>
+        <h2 className="section-heading">
+          <TextReveal>Skills</TextReveal>
+        </h2>
+        <FadeUp delay={0.15}>
+          <p className="section-subheading">Technologies I work with daily to build production-grade applications.</p>
+        </FadeUp>
+      </SmoothParallax>
 
       <div className="mt-16 space-y-14">
         {skillCategories.map((category, catIdx) => (
-          <motion.div
-            key={category.title}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.15 * catIdx }}
-            className="grid md:grid-cols-[200px_1fr] gap-6 items-start"
-          >
-            <h3 className="font-heading text-2xl md:text-3xl font-bold text-muted-foreground/30 tracking-wider">
-              {category.title}
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              {category.skills.map((skill, i) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: 0.15 * catIdx + 0.05 * i }}
-                  whileHover={{ scale: 1.08, y: -4 }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl glass-card hover:border-primary/30 transition-all duration-300 cursor-default"
-                >
-                  <img
-                    src={skill.icon}
-                    alt={skill.name}
-                    className="w-7 h-7 dark-icon-invert"
-                    loading="lazy"
-                  />
-                  <span className="text-sm font-medium text-foreground">{skill.name}</span>
-                </motion.div>
-              ))}
+          <FadeUp key={category.title} delay={0.1 * catIdx}>
+            <div className="grid md:grid-cols-[200px_1fr] gap-6 items-start">
+              <h3 className="font-heading text-2xl md:text-3xl font-bold text-muted-foreground/30 tracking-wider">
+                {category.title}
+              </h3>
+              <StaggerContainer className="flex flex-wrap gap-4" staggerDelay={0.06}>
+                {category.skills.map((skill) => (
+                  <StaggerItem key={skill.name}>
+                    <motion.div
+                      whileHover={{ scale: 1.08, y: -4 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                      className="flex items-center gap-3 px-4 py-3 rounded-xl glass-card hover:border-primary/30 transition-colors duration-300 cursor-default"
+                    >
+                      <img
+                        src={skill.icon}
+                        alt={skill.name}
+                        className="w-7 h-7"
+                        loading="lazy"
+                      />
+                      <span className="text-sm font-medium text-foreground">{skill.name}</span>
+                    </motion.div>
+                  </StaggerItem>
+                ))}
+              </StaggerContainer>
             </div>
-          </motion.div>
+          </FadeUp>
         ))}
       </div>
     </section>
