@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const techLabels = [
   "React", "TypeScript", "Next.js", "Node.js", "Redux",
-  "Docker", "AWS", "GraphQL", "CI/CD", "REST",
+  "Docker", "AWS", "CI/CD", "REST",
   "Jest", "MongoDB", "PostgreSQL", "Tailwind",
 ];
 
@@ -27,7 +27,7 @@ const InteractiveOrb = () => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => { setIsHovering(false); setMousePos({ x: 0, y: 0 }); }}
-      className="relative w-[580px] h-[580px] cursor-crosshair select-none"
+      className="relative w-[400px] h-[400px] xl:w-[480px] xl:h-[480px] cursor-crosshair select-none"
     >
       {/* Outer glow */}
       <motion.div
@@ -43,8 +43,8 @@ const InteractiveOrb = () => {
       {[0, 1, 2, 3].map((ring) => (
         <motion.div
           key={ring}
-          className="absolute rounded-full border border-primary/10"
-          style={{ inset: `${50 + ring * 45}px` }}
+          className="absolute rounded-full border border-primary/15"
+          style={{ inset: `${30 + ring * 40}px` }}
           animate={{
             rotate: ring % 2 === 0 ? [0, 360] : [360, 0],
             scale: isHovering ? 1 + ring * 0.015 : 1,
@@ -55,7 +55,7 @@ const InteractiveOrb = () => {
           }}
         >
           <motion.div
-            className="absolute w-2.5 h-2.5 rounded-full bg-primary/60"
+            className="absolute w-2.5 h-2.5 rounded-full bg-primary/70"
             style={{
               top: "-5px",
               left: "50%",
@@ -80,11 +80,11 @@ const InteractiveOrb = () => {
       <motion.div
         className="absolute rounded-full"
         style={{
-          inset: "190px",
-          background: "radial-gradient(circle at 35% 35%, hsl(175 75% 55% / 0.35), hsl(195 80% 45% / 0.2), hsl(215 70% 50% / 0.1))",
-          boxShadow: "0 0 80px hsl(175 75% 45% / 0.2), 0 0 160px hsl(175 75% 45% / 0.08), inset 0 0 60px hsl(175 75% 45% / 0.12)",
+          inset: "150px",
+          background: "radial-gradient(circle at 35% 35%, hsl(175 75% 55% / 0.4), hsl(195 80% 45% / 0.2), hsl(215 70% 50% / 0.1))",
+          boxShadow: "0 0 80px hsl(175 75% 45% / 0.25), 0 0 160px hsl(175 75% 45% / 0.1), inset 0 0 60px hsl(175 75% 45% / 0.15)",
           backdropFilter: "blur(20px)",
-          border: "1px solid hsl(175 75% 45% / 0.25)",
+          border: "1px solid hsl(175 75% 45% / 0.3)",
         }}
         animate={{
           x: mousePos.x * 25,
@@ -98,7 +98,7 @@ const InteractiveOrb = () => {
       <motion.div
         className="absolute rounded-full"
         style={{
-          inset: "220px",
+          inset: "175px",
           background: "radial-gradient(circle, hsl(175 75% 60% / 0.5), transparent 70%)",
         }}
         animate={{
@@ -112,13 +112,13 @@ const InteractiveOrb = () => {
       {/* Floating tech labels */}
       {techLabels.map((label, i) => {
         const angle = (i / techLabels.length) * Math.PI * 2;
-        const radius = 200 + (i % 3) * 30;
+        const radius = 160 + (i % 3) * 25;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         return (
           <motion.span
             key={label}
-            className="absolute text-xs font-heading font-medium text-muted-foreground/50 whitespace-nowrap pointer-events-none"
+            className="absolute text-[11px] font-heading font-medium text-muted-foreground/50 whitespace-nowrap pointer-events-none"
             style={{
               left: `calc(50% + ${x}px)`,
               top: `calc(50% + ${y}px)`,
@@ -127,7 +127,7 @@ const InteractiveOrb = () => {
             animate={{
               x: mousePos.x * (10 + i * 2),
               y: mousePos.y * (10 + i * 2),
-              opacity: isHovering ? 0.9 : 0.4,
+              opacity: isHovering ? 0.9 : 0.45,
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20, delay: i * 0.01 }}
           >
@@ -137,9 +137,9 @@ const InteractiveOrb = () => {
       })}
 
       {/* Floating particles */}
-      {Array.from({ length: 16 }).map((_, i) => {
-        const angle = (i / 16) * Math.PI * 2 + Math.PI / 6;
-        const radius = 100 + (i % 5) * 35;
+      {Array.from({ length: 14 }).map((_, i) => {
+        const angle = (i / 14) * Math.PI * 2 + Math.PI / 6;
+        const radius = 80 + (i % 4) * 30;
         return (
           <motion.div
             key={`p-${i}`}
