@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
+import { TextReveal, FadeUp, StaggerContainer, StaggerItem, SmoothParallax } from "./AnimationUtils";
 
 const experiences = [
   {
@@ -54,45 +54,58 @@ const experiences = [
 ];
 
 const ExperienceSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section id="experience" className="section-container" ref={ref}>
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
-      >
-        <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">Journey</p>
-        <h2 className="section-heading">Experience timeline.</h2>
-        <p className="section-subheading">
-          A progression from foundational internships to leading frontend architecture at enterprise scale.
-        </p>
-      </motion.div>
+    <section id="experience" className="section-container">
+      <SmoothParallax offset={30}>
+        <FadeUp>
+          <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">Journey</p>
+        </FadeUp>
+        <h2 className="section-heading">
+          <TextReveal>Experience timeline.</TextReveal>
+        </h2>
+        <FadeUp delay={0.15}>
+          <p className="section-subheading">
+            A progression from foundational internships to leading frontend architecture at enterprise scale.
+          </p>
+        </FadeUp>
+      </SmoothParallax>
 
       <div className="mt-12 relative">
         {/* Timeline line */}
-        <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-px" />
+        <motion.div
+          className="absolute left-[19px] top-0 bottom-0 w-px bg-border md:left-1/2 md:-translate-x-px origin-top"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+        />
 
         {experiences.map((exp, i) => {
           const isLeft = i % 2 === 0;
           return (
-            <motion.div
+            <FadeUp
               key={exp.company + exp.dates}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 * i }}
+              delay={0.15 * i}
               className={`relative mb-10 last:mb-0 pl-12 md:pl-0 md:w-1/2 ${
                 isLeft ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"
               }`}
             >
               {/* Dot */}
-              <div className={`absolute top-1 left-[12px] w-[15px] h-[15px] rounded-full border-2 border-primary bg-background z-10 md:left-auto ${
-                isLeft ? "md:right-[-7.5px]" : "md:left-[-7.5px]"
-              }`} />
+              <motion.div
+                className={`absolute top-1 left-[12px] w-[15px] h-[15px] rounded-full border-2 border-primary bg-background z-10 md:left-auto ${
+                  isLeft ? "md:right-[-7.5px]" : "md:left-[-7.5px]"
+                }`}
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.15 * i + 0.2, type: "spring", stiffness: 300 }}
+              />
 
-              <div className="glass-card rounded-xl p-5 hover-lift">
+              <motion.div
+                className="glass-card rounded-xl p-5 cursor-default"
+                whileHover={{ y: -4, boxShadow: "var(--glow-primary)" }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
                 <div className="flex items-center gap-2 mb-1">
                   <Briefcase size={14} className="text-primary" />
                   <span className="text-xs text-primary font-heading font-medium">{exp.dates}</span>
@@ -109,8 +122,8 @@ const ExperienceSection = () => {
                     </li>
                   ))}
                 </ul>
-              </div>
-            </motion.div>
+              </motion.div>
+            </FadeUp>
           );
         })}
       </div>
