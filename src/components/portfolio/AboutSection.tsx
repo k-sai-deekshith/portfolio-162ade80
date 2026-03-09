@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { TextReveal, FadeUp, SmoothParallax } from "./AnimationUtils";
 
 const AboutSection = () => {
@@ -17,20 +16,15 @@ const AboutSection = () => {
         </h2>
       </SmoothParallax>
 
-      <div className="max-w-3xl mt-10 space-y-5 text-secondary-foreground leading-relaxed">
+      <div className="max-w-3xl mt-10 space-y-6 text-secondary-foreground text-base md:text-lg leading-relaxed">
         <FadeUp delay={0.1}>
           <p>
-            I'm a frontend engineer with 3+ years of production experience building scalable web applications. My work sits at the intersection of frontend architecture, reusable design systems, and measurable engineering impact.
+            Frontend engineer with <span className="text-foreground font-semibold">3+ years of production experience</span> building <span className="text-foreground font-semibold">scalable web applications</span>. I work at the intersection of <span className="text-primary font-semibold">frontend architecture</span>, <span className="text-primary font-semibold">reusable design systems</span>, and <span className="text-primary font-semibold">measurable engineering impact</span>.
           </p>
         </FadeUp>
         <FadeUp delay={0.2}>
           <p>
-            I don't just build UIs — I design component systems, establish testing strategies, optimize performance at scale, and mentor engineers toward consistent quality. I've led sprint execution for cross-functional teams and driven architectural decisions that reduced defects, accelerated delivery, and improved developer experience.
-          </p>
-        </FadeUp>
-        <FadeUp delay={0.3}>
-          <p>
-            I hold a Master's in Software Engineering and a Bachelor's in Computer Science. I bring both academic depth and real-world shipping experience to every system I build.
+            Beyond building UIs — I design <span className="text-foreground font-semibold">component systems</span>, establish <span className="text-foreground font-semibold">testing strategies</span>, optimize performance at scale, and mentor engineers toward consistent quality. I hold a <span className="text-foreground font-semibold">Master's in Software Engineering</span> and a <span className="text-foreground font-semibold">Bachelor's in Computer Science</span>.
           </p>
         </FadeUp>
       </div>
