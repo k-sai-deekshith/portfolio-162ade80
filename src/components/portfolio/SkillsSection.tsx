@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp, StaggerContainer, StaggerItem, SmoothParallax } from "./AnimationUtils";
 
+interface Skill {
+  name: string;
+  icon: string;
+  invert?: boolean;
+}
 const skillCategories = [
   {
     title: "FRONTEND",
