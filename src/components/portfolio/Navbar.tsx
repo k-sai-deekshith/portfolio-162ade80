@@ -40,8 +40,8 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#" className="font-heading text-lg font-bold text-foreground tracking-tight">
-          SDK<span className="text-primary">.</span>
+        <a href="#" className="font-heading text-sm md:text-base font-bold text-foreground tracking-tight">
+          Sai Deekshith Katukojwala<span className="text-primary">.</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8">

@@ -19,7 +19,7 @@ const LoadingScreen = () => {
         >
           <div className="overflow-hidden">
             <motion.h1
-              className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground"
+              className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground text-center"
               initial={{ y: "100%" }}
               animate={{ y: "0%" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}

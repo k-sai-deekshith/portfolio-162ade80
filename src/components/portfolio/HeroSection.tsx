@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Mail, FileText } from "lucide-react";
-import ArchitectureCanvas from "./ArchitectureCanvas";
+import InteractiveOrb from "./InteractiveOrb";
 import { TextReveal, CharReveal, FadeUp, MagneticButton } from "./AnimationUtils";
 import { useRef } from "react";
 
@@ -39,28 +39,25 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 2.6 }}
             >
               <p className="text-primary font-heading font-medium text-sm tracking-widest uppercase mb-4">
-                <TextReveal delay={2.7}>Frontend Engineer</TextReveal>
+                <TextReveal delay={2.7}>Software Engineer</TextReveal>
               </p>
             </motion.div>
 
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-6">
-              <CharReveal delay={2.8}>Building scalable</CharReveal>
-              <br />
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1] mb-2">
               <span className="text-gradient">
-                <CharReveal delay={3.2}>frontend systems</CharReveal>
+                <CharReveal delay={2.8}>SOFTWARE</CharReveal>
               </span>
               <br />
-              <CharReveal delay={3.6}>that ship.</CharReveal>
+              <CharReveal delay={3.2}>ENGINEER</CharReveal>
             </h1>
 
-            <FadeUp delay={3.8}>
-              <p className="text-muted-foreground text-lg md:text-xl max-w-lg mb-8 leading-relaxed">
-                I architect production-grade React applications with a focus on
-                performance, design systems, and engineering rigor.
+            <FadeUp delay={3.5}>
+              <p className="text-muted-foreground text-lg md:text-xl max-w-lg mb-8 mt-6 leading-relaxed">
+                Hi! I'm <span className="text-foreground font-semibold">Sai Deekshith Katukojwala</span>. A software engineer with 3+ years of experience building high-performance, scalable, and production-grade web applications.
               </p>
             </FadeUp>
 
-            <FadeUp delay={4}>
+            <FadeUp delay={3.8}>
               <div className="flex flex-wrap gap-4">
                 <MagneticButton>
                   <Button variant="hero" size="lg" asChild>
@@ -92,15 +89,15 @@ const HeroSection = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 4.3 }}
+              transition={{ duration: 0.7, delay: 4.1 }}
               className="flex gap-6 mt-10 text-xs text-muted-foreground font-heading tracking-wider uppercase"
             >
-              {["React", "TypeScript", "Architecture", "Performance"].map((t, i) => (
+              {["React", "TypeScript", "Node.js", "Architecture"].map((t, i) => (
                 <motion.span
                   key={t}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 4.3 + i * 0.1, duration: 0.4 }}
+                  transition={{ delay: 4.1 + i * 0.1, duration: 0.4 }}
                 >
                   {t}
                   {i < 3 && <span className="text-border ml-6">·</span>}
@@ -113,9 +110,9 @@ const HeroSection = () => {
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.2, delay: 3, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block"
+            className="hidden lg:flex items-center justify-center"
           >
-            <ArchitectureCanvas />
+            <InteractiveOrb />
           </motion.div>
         </div>
       </motion.div>
