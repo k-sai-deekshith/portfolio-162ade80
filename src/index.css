@@ -147,11 +147,11 @@
 
   .section-heading {
     font-family: var(--heading-font);
-    @apply text-3xl md:text-4xl font-bold tracking-tight mb-4;
+    @apply text-4xl md:text-5xl font-bold tracking-tight mb-4;
   }
 
   .section-subheading {
-    @apply text-muted-foreground text-lg max-w-2xl;
+    @apply text-muted-foreground text-lg md:text-xl max-w-2xl;
   }
 
   .hover-lift {

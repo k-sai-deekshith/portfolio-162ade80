@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
-import { TextReveal, FadeUp, StaggerContainer, StaggerItem, SmoothParallax } from "./AnimationUtils";
+import { Briefcase, GraduationCap } from "lucide-react";
+import { TextReveal, FadeUp, SmoothParallax } from "./AnimationUtils";
 
-const experiences = [
+const timeline = [
   {
+    type: "work" as const,
     title: "Software Developer",
-    company: "PayPal",
+    org: "PayPal",
     location: "San Jose, CA",
     dates: "Apr 2025 — Present",
     highlights: [
@@ -17,8 +18,19 @@ const experiences = [
     ],
   },
   {
+    type: "education" as const,
+    title: "Master of Science — Software Engineering",
+    org: "San Jose State University",
+    location: "San Jose, CA",
+    dates: "Aug 2023 — May 2025",
+    highlights: [
+      "Focused on software architecture, cloud computing, and enterprise systems",
+    ],
+  },
+  {
+    type: "work" as const,
     title: "Frontend Engineer",
-    company: "Jio Platforms",
+    org: "Jio Platforms",
     location: "Mumbai, India",
     dates: "Jul 2021 — Jun 2023",
     highlights: [
@@ -30,8 +42,19 @@ const experiences = [
     ],
   },
   {
+    type: "education" as const,
+    title: "Bachelor of Technology — Computer Science",
+    org: "SRM Institute of Science and Technology",
+    location: "Chennai, India",
+    dates: "Jun 2017 — May 2021",
+    highlights: [
+      "Specialized in data structures, algorithms, and web technologies",
+    ],
+  },
+  {
+    type: "work" as const,
     title: "SDE Intern",
-    company: "MathWorks",
+    org: "MathWorks",
     location: "Hyderabad, India",
     dates: "Jun 2020 — Jul 2020",
     highlights: [
@@ -41,8 +64,9 @@ const experiences = [
     ],
   },
   {
+    type: "work" as const,
     title: "SDE Intern",
-    company: "Timken India",
+    org: "Timken India",
     location: "Bangalore, India",
     dates: "May 2019 — Jul 2019",
     highlights: [
@@ -61,7 +85,7 @@ const ExperienceSection = () => {
           <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">Journey</p>
         </FadeUp>
         <h2 className="section-heading">
-          <TextReveal>Experience timeline.</TextReveal>
+          <TextReveal>Experience & Education.</TextReveal>
         </h2>
         <FadeUp delay={0.15}>
           <p className="section-subheading">
@@ -80,11 +104,13 @@ const ExperienceSection = () => {
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
         />
 
-        {experiences.map((exp, i) => {
+        {timeline.map((item, i) => {
           const isLeft = i % 2 === 0;
+          const isEducation = item.type === "education";
+          const Icon = isEducation ? GraduationCap : Briefcase;
           return (
             <FadeUp
-              key={exp.company + exp.dates}
+              key={item.org + item.dates}
               delay={0.15 * i}
               className={`relative mb-10 last:mb-0 pl-12 md:pl-0 md:w-1/2 ${
                 isLeft ? "md:pr-12 md:ml-0" : "md:pl-12 md:ml-auto"
@@ -92,7 +118,9 @@ const ExperienceSection = () => {
             >
               {/* Dot */}
               <motion.div
-                className={`absolute top-1 left-[12px] w-[15px] h-[15px] rounded-full border-2 border-primary bg-background z-10 md:left-auto ${
+                className={`absolute top-1 left-[12px] w-[15px] h-[15px] rounded-full border-2 ${
+                  isEducation ? 'border-accent bg-accent/20' : 'border-primary bg-background'
+                } z-10 md:left-auto ${
                   isLeft ? "md:right-[-7.5px]" : "md:left-[-7.5px]"
                 }`}
                 initial={{ scale: 0 }}
@@ -102,22 +130,27 @@ const ExperienceSection = () => {
               />
 
               <motion.div
-                className="glass-card rounded-xl p-5 cursor-default"
+                className={`glass-card rounded-xl p-5 cursor-default ${isEducation ? 'border-accent/20' : ''}`}
                 whileHover={{ y: -4, boxShadow: "var(--glow-primary)" }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <div className="flex items-center gap-2 mb-1">
-                  <Briefcase size={14} className="text-primary" />
-                  <span className="text-xs text-primary font-heading font-medium">{exp.dates}</span>
+                  <Icon size={14} className="text-primary" />
+                  <span className="text-xs text-primary font-heading font-medium">{item.dates}</span>
+                  {isEducation && (
+                    <span className="text-[10px] font-heading font-semibold text-accent bg-accent/10 px-2 py-0.5 rounded-full ml-1">
+                      EDUCATION
+                    </span>
+                  )}
                 </div>
-                <h3 className="font-heading font-semibold text-foreground">
-                  {exp.title} <span className="text-muted-foreground font-normal">@ {exp.company}</span>
+                <h3 className="font-heading font-semibold text-foreground text-base md:text-lg">
+                  {item.title} <span className="text-muted-foreground font-normal">@ {item.org}</span>
                 </h3>
-                <p className="text-xs text-muted-foreground mb-3">{exp.location}</p>
+                <p className="text-xs text-muted-foreground mb-3">{item.location}</p>
                 <ul className="space-y-1.5">
-                  {exp.highlights.map((h, j) => (
-                    <li key={j} className="text-sm text-secondary-foreground flex items-start gap-2">
-                      <span className="w-1 h-1 rounded-full bg-primary/60 mt-2 flex-shrink-0" />
+                  {item.highlights.map((h, j) => (
+                    <li key={j} className="text-sm md:text-base text-secondary-foreground flex items-start gap-2">
+                      <span className="w-1 h-1 rounded-full bg-primary/60 mt-2.5 flex-shrink-0" />
                       {h}
                     </li>
                   ))}

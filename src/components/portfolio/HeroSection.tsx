@@ -43,7 +43,7 @@ const HeroSection = () => {
 
             <FadeUp delay={3.2}>
               <p className="text-muted-foreground text-lg md:text-xl max-w-xl mb-10 leading-relaxed">
-                Hi! I'm <span className="text-foreground font-semibold">Sai Deekshith Katukojwala</span>. A software engineer with 3+ years of experience building high-performance, scalable, and production-grade web applications.
+                Hi! I'm <span className="text-foreground font-semibold">Sai Deekshith Katukojwala</span> — a software engineer with 3+ years of experience building high-performance, scalable, and production-grade web applications.
               </p>
             </FadeUp>
 

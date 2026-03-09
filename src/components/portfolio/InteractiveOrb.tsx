@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 
 const techLabels = [
   "React", "TypeScript", "Next.js", "Node.js", "Redux",
-  "Docker", "AWS", "CI/CD", "REST",
-  "Jest", "MongoDB", "PostgreSQL", "Tailwind",
+  "Docker", "AWS", "Spring Boot", "Jest",
+  "MongoDB", "PostgreSQL", "Tailwind", "Angular",
+  "Python", "Java", "Express", "Cypress",
 ];
 
 const InteractiveOrb = () => {
@@ -27,7 +28,7 @@ const InteractiveOrb = () => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => { setIsHovering(false); setMousePos({ x: 0, y: 0 }); }}
-      className="relative w-[400px] h-[400px] xl:w-[480px] xl:h-[480px] cursor-crosshair select-none"
+      className="relative w-[420px] h-[420px] xl:w-[520px] xl:h-[520px] cursor-crosshair select-none"
     >
       {/* Outer glow */}
       <motion.div
@@ -44,7 +45,7 @@ const InteractiveOrb = () => {
         <motion.div
           key={ring}
           className="absolute rounded-full border border-primary/15"
-          style={{ inset: `${30 + ring * 40}px` }}
+          style={{ inset: `${20 + ring * 45}px` }}
           animate={{
             rotate: ring % 2 === 0 ? [0, 360] : [360, 0],
             scale: isHovering ? 1 + ring * 0.015 : 1,
@@ -80,7 +81,7 @@ const InteractiveOrb = () => {
       <motion.div
         className="absolute rounded-full"
         style={{
-          inset: "150px",
+          inset: "160px",
           background: "radial-gradient(circle at 35% 35%, hsl(175 75% 55% / 0.4), hsl(195 80% 45% / 0.2), hsl(215 70% 50% / 0.1))",
           boxShadow: "0 0 80px hsl(175 75% 45% / 0.25), 0 0 160px hsl(175 75% 45% / 0.1), inset 0 0 60px hsl(175 75% 45% / 0.15)",
           backdropFilter: "blur(20px)",
@@ -98,7 +99,7 @@ const InteractiveOrb = () => {
       <motion.div
         className="absolute rounded-full"
         style={{
-          inset: "175px",
+          inset: "185px",
           background: "radial-gradient(circle, hsl(175 75% 60% / 0.5), transparent 70%)",
         }}
         animate={{
@@ -112,13 +113,13 @@ const InteractiveOrb = () => {
       {/* Floating tech labels */}
       {techLabels.map((label, i) => {
         const angle = (i / techLabels.length) * Math.PI * 2;
-        const radius = 160 + (i % 3) * 25;
+        const radius = 170 + (i % 3) * 28;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         return (
           <motion.span
             key={label}
-            className="absolute text-[11px] font-heading font-medium text-muted-foreground/50 whitespace-nowrap pointer-events-none"
+            className="absolute text-xs font-heading font-medium text-muted-foreground/60 whitespace-nowrap pointer-events-none"
             style={{
               left: `calc(50% + ${x}px)`,
               top: `calc(50% + ${y}px)`,
@@ -127,7 +128,7 @@ const InteractiveOrb = () => {
             animate={{
               x: mousePos.x * (10 + i * 2),
               y: mousePos.y * (10 + i * 2),
-              opacity: isHovering ? 0.9 : 0.45,
+              opacity: isHovering ? 0.95 : 0.5,
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20, delay: i * 0.01 }}
           >
