@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import { TextReveal, FadeUp, StaggerContainer, StaggerItem, SmoothParallax } from "./AnimationUtils";
 
+interface Skill {
+  name: string;
+  icon: string;
+  invert?: boolean;
+}
 const skillCategories = [
   {
     title: "FRONTEND",
@@ -58,7 +63,7 @@ const skillCategories = [
     title: "AI TOOLS",
     skills: [
       { name: "Cursor", icon: "https://www.cursor.com/apple-touch-icon.png" },
-      { name: "Claude Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/claude/claude-original.svg" },
+      { name: "Claude Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg", invert: true },
       { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
     ],
   },
@@ -97,7 +102,7 @@ const SkillsSection = () => {
                       <img
                         src={skill.icon}
                         alt={skill.name}
-                        className={`w-7 h-7 ${(skill as any).invert ? 'invert' : ''}`}
+                        className={`w-7 h-7 ${skill.invert ? 'brightness-0 invert' : ''}`}
                         loading="lazy"
                       />
                       <span className="text-sm font-medium text-foreground">{skill.name}</span>
