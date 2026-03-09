@@ -24,7 +24,7 @@ const ContactSection = () => {
         <p className="text-primary font-heading text-sm tracking-widest uppercase mb-3">Contact</p>
         <h2 className="section-heading">Let's build something.</h2>
         <p className="text-muted-foreground mt-2 mb-10">
-          Open to senior frontend roles, architecture-focused opportunities, and interesting engineering challenges.
+          Open to frontend roles, architecture-focused opportunities, and interesting engineering challenges.
         </p>
 
         <div className="space-y-4">

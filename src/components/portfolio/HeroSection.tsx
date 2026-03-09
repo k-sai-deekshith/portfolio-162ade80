@@ -29,7 +29,7 @@ const HeroSection = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
             >
               <p className="text-primary font-heading font-medium text-sm tracking-widest uppercase mb-4">
-                Senior Frontend Engineer
+                Frontend Engineer
               </p>
             </motion.div>
 
@@ -53,7 +53,7 @@ const HeroSection = () => {
               className="text-muted-foreground text-lg md:text-xl max-w-lg mb-8 leading-relaxed"
             >
               I architect production-grade React applications with a focus on
-              performance, design systems, and engineering rigor. Currently at PayPal.
+              performance, design systems, and engineering rigor.
             </motion.p>
 
             <motion.div
@@ -63,7 +63,7 @@ const HeroSection = () => {
               className="flex flex-wrap gap-4"
             >
               <Button variant="hero" size="lg" asChild>
-                <a href="#projects">
+                <a href="#experience">
                   View Work
                   <ArrowDown size={16} />
                 </a>
