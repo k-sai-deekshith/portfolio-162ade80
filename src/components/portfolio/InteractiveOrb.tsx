@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 const techLabels = [
@@ -27,47 +27,52 @@ const InteractiveOrb = () => {
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => { setIsHovering(false); setMousePos({ x: 0, y: 0 }); }}
-      className="relative w-[420px] h-[420px] cursor-crosshair select-none"
+      className="relative w-[580px] h-[580px] cursor-crosshair select-none"
     >
-      {/* Outer glow ring */}
+      {/* Outer glow */}
       <motion.div
-        className="absolute inset-8 rounded-full"
+        className="absolute inset-4 rounded-full"
         style={{
-          background: "radial-gradient(circle, hsl(175 75% 45% / 0.06) 0%, transparent 70%)",
+          background: "radial-gradient(circle, hsl(175 75% 45% / 0.08) 0%, transparent 70%)",
         }}
-        animate={{
-          scale: isHovering ? 1.1 : 1,
-        }}
+        animate={{ scale: isHovering ? 1.1 : 1 }}
         transition={{ type: "spring", stiffness: 150, damping: 20 }}
       />
 
       {/* Orbiting rings */}
-      {[0, 1, 2].map((ring) => (
+      {[0, 1, 2, 3].map((ring) => (
         <motion.div
           key={ring}
           className="absolute rounded-full border border-primary/10"
-          style={{
-            inset: `${40 + ring * 35}px`,
-          }}
+          style={{ inset: `${50 + ring * 45}px` }}
           animate={{
-            rotate: [0, 360],
-            scale: isHovering ? 1 + ring * 0.02 : 1,
+            rotate: ring % 2 === 0 ? [0, 360] : [360, 0],
+            scale: isHovering ? 1 + ring * 0.015 : 1,
           }}
           transition={{
-            rotate: { duration: 20 + ring * 10, repeat: Infinity, ease: "linear" },
+            rotate: { duration: 25 + ring * 12, repeat: Infinity, ease: "linear" },
             scale: { type: "spring", stiffness: 200, damping: 20 },
           }}
         >
-          {/* Orbiting dot */}
           <motion.div
-            className="absolute w-2 h-2 rounded-full bg-primary/60"
+            className="absolute w-2.5 h-2.5 rounded-full bg-primary/60"
             style={{
-              top: "-4px",
+              top: "-5px",
               left: "50%",
-              marginLeft: "-4px",
-              boxShadow: "0 0 12px hsl(175 75% 45% / 0.4)",
+              marginLeft: "-5px",
+              boxShadow: "0 0 16px hsl(175 75% 45% / 0.5)",
             }}
           />
+          {ring < 3 && (
+            <motion.div
+              className="absolute w-1.5 h-1.5 rounded-full bg-primary/40"
+              style={{
+                bottom: "-3px",
+                left: "30%",
+                boxShadow: "0 0 10px hsl(175 75% 45% / 0.3)",
+              }}
+            />
+          )}
         </motion.div>
       ))}
 
@@ -75,30 +80,30 @@ const InteractiveOrb = () => {
       <motion.div
         className="absolute rounded-full"
         style={{
-          inset: "130px",
-          background: "radial-gradient(circle at 35% 35%, hsl(175 75% 55% / 0.3), hsl(195 80% 45% / 0.15), hsl(215 70% 50% / 0.08))",
-          boxShadow: "0 0 60px hsl(175 75% 45% / 0.15), inset 0 0 40px hsl(175 75% 45% / 0.1)",
+          inset: "190px",
+          background: "radial-gradient(circle at 35% 35%, hsl(175 75% 55% / 0.35), hsl(195 80% 45% / 0.2), hsl(215 70% 50% / 0.1))",
+          boxShadow: "0 0 80px hsl(175 75% 45% / 0.2), 0 0 160px hsl(175 75% 45% / 0.08), inset 0 0 60px hsl(175 75% 45% / 0.12)",
           backdropFilter: "blur(20px)",
-          border: "1px solid hsl(175 75% 45% / 0.2)",
-        }}
-        animate={{
-          x: mousePos.x * 20,
-          y: mousePos.y * 20,
-          scale: isHovering ? 1.08 : 1,
-        }}
-        transition={{ type: "spring", stiffness: 200, damping: 25 }}
-      />
-
-      {/* Inner core glow */}
-      <motion.div
-        className="absolute rounded-full"
-        style={{
-          inset: "155px",
-          background: "radial-gradient(circle, hsl(175 75% 60% / 0.4), transparent 70%)",
+          border: "1px solid hsl(175 75% 45% / 0.25)",
         }}
         animate={{
           x: mousePos.x * 25,
           y: mousePos.y * 25,
+          scale: isHovering ? 1.1 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 180, damping: 22 }}
+      />
+
+      {/* Inner core */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          inset: "220px",
+          background: "radial-gradient(circle, hsl(175 75% 60% / 0.5), transparent 70%)",
+        }}
+        animate={{
+          x: mousePos.x * 30,
+          y: mousePos.y * 30,
           opacity: isHovering ? 1 : 0.6,
         }}
         transition={{ type: "spring", stiffness: 200, damping: 25 }}
@@ -107,21 +112,21 @@ const InteractiveOrb = () => {
       {/* Floating tech labels */}
       {techLabels.map((label, i) => {
         const angle = (i / techLabels.length) * Math.PI * 2;
-        const radius = 155 + (i % 3) * 25;
+        const radius = 200 + (i % 3) * 30;
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         return (
           <motion.span
             key={label}
-            className="absolute text-[10px] font-heading font-medium text-muted-foreground/60 whitespace-nowrap pointer-events-none"
+            className="absolute text-xs font-heading font-medium text-muted-foreground/50 whitespace-nowrap pointer-events-none"
             style={{
               left: `calc(50% + ${x}px)`,
               top: `calc(50% + ${y}px)`,
               transform: "translate(-50%, -50%)",
             }}
             animate={{
-              x: mousePos.x * (8 + i * 2),
-              y: mousePos.y * (8 + i * 2),
+              x: mousePos.x * (10 + i * 2),
+              y: mousePos.y * (10 + i * 2),
               opacity: isHovering ? 0.9 : 0.4,
             }}
             transition={{ type: "spring", stiffness: 120, damping: 20, delay: i * 0.01 }}
@@ -132,28 +137,28 @@ const InteractiveOrb = () => {
       })}
 
       {/* Floating particles */}
-      {Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i / 12) * Math.PI * 2 + Math.PI / 6;
-        const radius = 80 + (i % 4) * 30;
+      {Array.from({ length: 16 }).map((_, i) => {
+        const angle = (i / 16) * Math.PI * 2 + Math.PI / 6;
+        const radius = 100 + (i % 5) * 35;
         return (
           <motion.div
-            key={`particle-${i}`}
-            className="absolute w-1 h-1 rounded-full bg-primary/40"
+            key={`p-${i}`}
+            className="absolute w-1.5 h-1.5 rounded-full bg-primary/30"
             style={{
               left: `calc(50% + ${Math.cos(angle) * radius}px)`,
               top: `calc(50% + ${Math.sin(angle) * radius}px)`,
             }}
             animate={{
-              x: mousePos.x * (5 + i * 3),
-              y: mousePos.y * (5 + i * 3),
-              scale: [1, 1.5, 1],
-              opacity: [0.3, 0.7, 0.3],
+              x: mousePos.x * (6 + i * 2.5),
+              y: mousePos.y * (6 + i * 2.5),
+              scale: [1, 1.6, 1],
+              opacity: [0.2, 0.6, 0.2],
             }}
             transition={{
               x: { type: "spring", stiffness: 100, damping: 20 },
               y: { type: "spring", stiffness: 100, damping: 20 },
-              scale: { duration: 2 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
-              opacity: { duration: 2 + i * 0.3, repeat: Infinity, ease: "easeInOut" },
+              scale: { duration: 2.5 + i * 0.25, repeat: Infinity, ease: "easeInOut" },
+              opacity: { duration: 2.5 + i * 0.25, repeat: Infinity, ease: "easeInOut" },
             }}
           />
         );
