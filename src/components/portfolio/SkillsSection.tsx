@@ -102,7 +102,7 @@ const SkillsSection = () => {
                       <img
                         src={skill.icon}
                         alt={skill.name}
-                        className={`w-7 h-7 ${(skill as any).invert ? 'invert' : ''}`}
+                        className={`w-7 h-7 ${skill.invert ? 'brightness-0 invert' : ''}`}
                         loading="lazy"
                       />
                       <span className="text-sm font-medium text-foreground">{skill.name}</span>
