@@ -63,7 +63,7 @@ const skillCategories = [
     title: "AI TOOLS",
     skills: [
       { name: "Cursor", icon: "https://www.cursor.com/apple-touch-icon.png" },
-      { name: "Claude Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/anthropic/anthropic-original.svg", invert: true },
+      { name: "Claude Code", icon: "https://claude.ai/favicon.ico" },
       { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg" },
     ],
   },
